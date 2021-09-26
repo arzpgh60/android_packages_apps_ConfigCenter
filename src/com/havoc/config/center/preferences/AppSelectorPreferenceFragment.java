@@ -1,6 +1,7 @@
 /**
  * Copyright (C) 2018 The LineageOS Project
  * Copyright (C) 2019 PixelExperience
+ * Copyright (C) 2021 Havoc-OS
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +16,7 @@
  * limitations under the License.
  */
 
-package com.havoc.config.center.fragments;
+package com.havoc.config.center.preferences;
 
 import android.app.ActivityManager;
 import android.annotation.Nullable;
@@ -25,6 +26,8 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.Bundle;
+import android.os.UserHandle;
+import android.provider.Settings;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,10 +38,8 @@ import android.widget.ListView;
 import android.widget.SectionIndexer;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
-import com.android.internal.util.custom.cutout.CutoutFullscreenController;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
@@ -50,9 +51,13 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.HashSet;
+import java.util.Set;
 
-public class DisplayCutoutForceFullscreenSettings extends SettingsPreferenceFragment
+public class AppSelectorPreferenceFragment extends SettingsPreferenceFragment
         implements ApplicationsState.Callbacks {
+
+    public Context mContext;
 
     private AllPackagesAdapter mAllPackagesAdapter;
     private ApplicationsState mApplicationsState;
@@ -60,9 +65,9 @@ public class DisplayCutoutForceFullscreenSettings extends SettingsPreferenceFrag
     private ActivityFilter mActivityFilter;
     private Map<String, ApplicationsState.AppEntry> mEntryMap =
             new HashMap<String, ApplicationsState.AppEntry>();
+    private Set<String> mApps = new HashSet<>();
 
     private ListView mUserListView;
-    private CutoutFullscreenController mCutoutForceFullscreenSettings;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -73,14 +78,21 @@ public class DisplayCutoutForceFullscreenSettings extends SettingsPreferenceFrag
         mSession.onResume();
         mActivityFilter = new ActivityFilter(getActivity().getPackageManager());
         mAllPackagesAdapter = new AllPackagesAdapter(getActivity());
+        mContext = getActivity().getApplicationContext();
 
-        mCutoutForceFullscreenSettings = new CutoutFullscreenController(getContext());
+        String apps = Settings.System.getStringForUser(mContext.getContentResolver(),
+                getPreferenceKey(), UserHandle.USER_CURRENT);
+        if (apps != null) {
+            setApps(new HashSet<>(Arrays.asList(apps.split("\\|"))));
+        } else {
+            setApps(new HashSet<>());
+        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        getActivity().getActionBar().setTitle(R.string.display_cutout_force_fullscreen_title);
+        getActivity().getActionBar().setTitle(getTitle());
         return inflater.inflate(R.layout.app_selector_preference, container, false);
     }
 
@@ -146,6 +158,14 @@ public class DisplayCutoutForceFullscreenSettings extends SettingsPreferenceFrag
 
     @Override
     public void onRunningStateChanged(boolean running) {}
+
+    public String getTitle() {
+        return getString(R.string.settings_label);
+    }
+
+    public String getPreferenceKey() {
+        return null;
+    }
 
     private void handleAppEntries(List<ApplicationsState.AppEntry> entries) {
         final ArrayList<String> sections = new ArrayList<String>();
@@ -237,23 +257,22 @@ public class DisplayCutoutForceFullscreenSettings extends SettingsPreferenceFrag
                 return holder.rootView;
             }
 
+            getApps();
+
             holder.title.setText(entry.label);
             mApplicationsState.ensureIcon(entry);
             holder.icon.setImageDrawable(entry.icon);
             holder.state.setTag(entry);
-            holder.state.setChecked(mCutoutForceFullscreenSettings.shouldForceCutoutFullscreen(entry.info.packageName));
+            holder.state.setChecked(mApps.contains(entry.info.packageName));
             holder.state.setOnCheckedChangeListener((buttonView, isChecked) -> {
                 final ApplicationsState.AppEntry appEntry =
                         (ApplicationsState.AppEntry) buttonView.getTag();
 
                 if (isChecked) {
-                    mCutoutForceFullscreenSettings.addApp(appEntry.info.packageName);
+                    addApp(appEntry.info.packageName);
                 } else {
-                    mCutoutForceFullscreenSettings.removeApp(appEntry.info.packageName);
+                    removeApp(appEntry.info.packageName);
                 }
-                Toast.makeText(getActivity(),
-                    getActivity().getString(R.string.display_cutout_force_fullscreen_restart_app),
-                    Toast.LENGTH_SHORT).show();
             });
             return holder.rootView;
         }
@@ -346,20 +365,12 @@ public class DisplayCutoutForceFullscreenSettings extends SettingsPreferenceFrag
         @Override
         public void init() {}
 
-        private final String[] hideApps = {"com.android.settings", "com.android.documentsui",
-            "com.android.fmradio", "com.caf.fmradio", "com.android.stk",
-            "com.google.android.calculator", "com.google.android.calendar",
-            "com.google.android.deskclock", "com.google.android.contacts",
-            "com.google.android.apps.messaging", "com.google.android.googlequicksearchbox",
-            "com.android.vending", "com.google.android.dialer",
-            "com.google.android.apps.wallpaper", "com.google.android.as"};
-
         @Override
         public boolean filterApp(ApplicationsState.AppEntry entry) {
             boolean show = !mAllPackagesAdapter.mEntries.contains(entry.info.packageName);
             if (show) {
                 synchronized (mLauncherResolveInfoList) {
-                    show = mLauncherResolveInfoList.contains(entry.info.packageName) && !Arrays.asList(hideApps).contains(entry.info.packageName);
+                    show = mLauncherResolveInfoList.contains(entry.info.packageName);
                 }
             }
             return show;
@@ -369,5 +380,25 @@ public class DisplayCutoutForceFullscreenSettings extends SettingsPreferenceFrag
     @Override
     public int getMetricsCategory() {
         return MetricsEvent.HAVOC_SETTINGS;
+    }
+
+    private Set<String> getApps() {
+        return mApps;
+    }
+
+    private void addApp(String packageName) {
+        mApps.add(packageName);
+        Settings.System.putString(mContext.getContentResolver(),
+                getPreferenceKey(), String.join("|", mApps));
+    }
+
+    private void removeApp(String packageName) {
+        mApps.remove(packageName);
+        Settings.System.putString(mContext.getContentResolver(),
+                getPreferenceKey(), String.join("|", mApps));
+    }
+
+    private void setApps(Set<String> apps) {
+        mApps = apps;
     }
 }

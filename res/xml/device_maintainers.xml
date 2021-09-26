@@ -477,6 +477,16 @@
                 android:data="https://t.me/SyberHexen" />
         </Preference>
 
+        <Preference
+            android:id="@+id/device_channel"
+            android:icon="@drawable/havoc_device"
+            android:summary="@string/device_channel_summary"
+            android:title="@string/device_channel" >
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="https://t.me/SyberHexen" />
+        </Preference>
+
         <!--<Preference
             android:id="@+id/device_payton"
             android:icon="@drawable/havoc_device"
@@ -611,6 +621,16 @@
                 android:action="android.intent.action.VIEW"
                 android:data="https://t.me/NaassomDourado" />
         </Preference>-->
+
+        <Preference
+            android:id="@+id/device_apollo"
+            android:icon="@drawable/havoc_device"
+            android:summary="@string/device_apollo_summary"
+            android:title="@string/device_apollo">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="https://t.me/sewa2k" />
+        </Preference>
 
         <Preference
             android:id="@+id/device_alioth"
@@ -802,15 +822,15 @@
                 android:data="https://t.me/XtremeQ" />
         </Preference>-->
 
-        <!--<Preference
+        <Preference
             android:id="@+id/device_santoni"
             android:icon="@drawable/havoc_device"
             android:summary="@string/device_santoni_summary"
             android:title="@string/device_santoni">
             <intent
                 android:action="android.intent.action.VIEW"
-                android:data="https://t.me/beingstargazer" />
-        </Preference>-->
+                android:data="https://t.me/XDDEATH69" />
+        </Preference>
 
         <!--<Preference
             android:id="@+id/device_rosy"
@@ -1106,6 +1126,16 @@
                 android:action="android.intent.action.VIEW"
                 android:data="https://t.me/ComicoX" />
         </Preference>-->
+
+        <Preference
+            android:id="@+id/device_I002D"
+            android:icon="@drawable/havoc_device"
+            android:summary="@string/device_I002D_summary"
+            android:title="@string/device_I002D">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="https://t.me/ComicoX" />
+        </Preference>
 
         <!--<Preference
             android:id="@+id/device_X00R"

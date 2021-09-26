@@ -34,7 +34,7 @@
     <string name="misc_summary">Gaming mode, charging animation</string>
     <string name="navigation_title">Navigation</string>
     <string name="notifications_title">Notifications</string>
-    <string name="notifications_summary">Edge lighting, heads-up</string>
+    <string name="notifications_summary">Edge lighting, heads up</string>
     <string name="quicksettings_title">Quick Settings</string>
     <string name="quicksettings_summary">Tile layout, footer icons</string>
     <string name="statusbar_title">Status Bar</string>
@@ -44,7 +44,7 @@
     <string name="ambient_display_custom_title">Ambient Display</string>
     <string name="ambient_display_custom_summary">Always on, music ticker, gestures</string>
     <string name="screen_title">Screen</string>
-    <string name="screen_summary">Rounded corners, legacy app scaling</string>
+    <string name="screen_summary">Rounded corners, display cutout</string>
     <string name="media_title">Media</string>
     <string name="media_summary">Adaptive playback, music visualizer</string>
 
@@ -168,14 +168,10 @@
     <string name="notification_stat">Status bar</string>
     <string name="heads_up_notifications">Heads Up</string>
     <string name="heads_up_notifications_summary">Pop up status bar notifications</string>
-    <string name="add_heads_up_package">Add app</string>
     <string name="heads_up_stoplist_title">Stoplist</string>
-    <string name="add_heads_up_stoplist_summary">Disable heads up in these applications</string>
+    <string name="heads_up_stoplist_summary">Disable heads up in these applications</string>
     <string name="heads_up_blacklist_title">Blacklist</string>
-    <string name="add_heads_up_blacklist_summary">Disable heads up for these applications</string>
-    <string name="profile_choose_app">Choose app</string>
-    <string name="dialog_delete_title">Delete</string>
-    <string name="dialog_delete_message">Remove selected item?</string>
+    <string name="heads_up_blacklist_summary">Disable heads up for these applications</string>
 
     <!-- QuickSettings haptic feedback -->
     <string name="quick_settings_vibrate_title">Haptic feedback</string>
@@ -421,35 +417,11 @@
     <string name="quick_pulldown_left">Left</string>
     <string name="quick_pulldown_right">Right</string>
 
-    <!-- Gaming mode -->
-    <string name="gaming_mode_title">Gaming Mode</string>
-    <string name="gaming_mode_summary">Enhance your gaming experience</string>
-    <string name="gaming_mode_app_picker_title">Automatically turn on for these apps</string>
-    <string name="add_gaming_mode_package_title">Add apps for Gaming mode</string>
-    <string name="add_gaming_mode_package_summary">Gaming mode will turn on automatically when these apps are opened and turn off when they are closed</string>
-    <string name="gaming_mode_headsup_title">Block notifications</string>
-    <string name="gaming_mode_headsup_summary">Block all headsup messages except calls</string>
-    <string name="gaming_mode_hardware_keys_title">Lock buttons</string>
-    <string name="gaming_mode_hardware_keys_summary">Disable hardware buttons when Gaming mode is turned on</string>
-    <string name="gaming_mode_brightness_title">Disable automatic brightness</string>
-    <string name="gaming_mode_brightness_summary">Lock screen brightness when Gaming mode is turned on</string>
     <string name="gaming_mode_ringer_title">Ringer mode</string>
     <string name="gaming_mode_ringer_off_title">Do not change</string>
     <string name="gaming_mode_ringer_vibrate_title">Vibrate</string>
     <string name="gaming_mode_ringer_dnd_title">Do Not Disturb</string>
     <string name="gaming_mode_ringer_silent_title">Silent</string>
-    <string name="gaming_mode_notifications_title">Gaming mode indication</string>
-    <string name="gaming_mode_notifications_off_title">Disabled</string>
-    <string name="gaming_mode_notifications_notif_title">Show notification</string>
-    <string name="gaming_mode_notifications_toast_title">Show toasts</string>
-    <string name="gaming_mode_notifications_all_title">Show toasts and notification</string>
-    <string name="gaming_mode_dynamic_title">Dynamic mode</string>
-    <string name="gaming_mode_dynamic_summary">Try detecting and adding gaming apps automatically</string>
-    <string name="gaming_mode_headsup_allow">Allow all headsup notifications</string>
-    <string name="gaming_mode_headsup_dnc">Block all headsup notifications except calls &amp; alarms</string>
-    <string name="gaming_mode_headsup_clock">Block all headsup notifications except alarms</string>
-    <string name="gaming_mode_headsup_dialer">Block all headsup notifications except calls</string>
-    <string name="gaming_mode_headsup_stop">Block all headsup notifications</string>
 
     <!-- Volume key answer -->
     <string name="volume_answer_call_title">Answer call</string>
@@ -807,7 +779,7 @@
     <!-- Status Bar Ticker -->
     <string name="ticker_screen_title">Ticker</string>
     <string name="ticker_screen_summary">Ticker-style status bar notifications</string>
-    <string name="ticker_screen_footer">Ticker is visible only when heads-up notifications are not shown</string>
+    <string name="ticker_screen_footer">Ticker is visible only when heads up notifications are not shown</string>
     <string name="ticker_mode_title">Show ticker for</string>
     <string name="ticker_notifications">Notifications</string>
     <string name="ticker_media">Notifications and music</string>
@@ -897,7 +869,7 @@
 
     <!-- Don't touch headsup -->
     <string name="dont_touch_headsup_title">Disable app launch</string>
-    <string name="dont_touch_headsup_summary">Avoid launching the app when tapping the heads-up notification</string>
+    <string name="dont_touch_headsup_summary">Avoid launching the app when tapping the heads up notification</string>
 
     <!-- Generic stuff used everywhere -->
     <string name="reset">Reset</string>
@@ -974,5 +946,65 @@
     <string name="sleep_mode_aggressive_toggle_title">Turn on Aggressive Battery</string>
     <string name="sleep_mode_aggressive_toggle_summary">Enable Aggressive idle and standby when Sleep mode is turned on</string>
     <string name="sleep_mode_display_text">Sleep mode allows you to disable certain services to help save battery and silence your phone while you sleep.</string>
+
+    <!-- Anti-falsing -->
+    <string name="keyguard_anti_falsing_title">Prevent accidental swipe</string>
+    <string name="keyguard_anti_falsing_summary">Avoid unintentional swipe up for PIN/Pattern/Password</string>
+
+    <!-- Gaming mode -->
+    <string name="gaming_mode_title">Gaming mode</string>
+    <string name="gaming_mode_summary">Enhance your gaming experience</string>
+
+    <string name="gaming_mode_apps_title">Game list</string>
+    <string name="gaming_mode_apps_summary">Choose the apps you want to automatically turn on game mode for</string>
+    <string name="gaming_mode_dynamic_add_title">Dynamic mode</string>
+    <string name="gaming_mode_dynamic_add_summary">Try detecting and adding games automatically</string>
+
+    <string name="gaming_mode_overlay">Overlay</string>
+    <string name="gaming_mode_use_menu_overlay_title">Show overlay</string>
+    <string name="gaming_mode_use_menu_overlay_summary">Show floating button and overlay when in game mode</string>
+    <string name="gaming_mode_quick_start_apps_title">Quick launch apps</string>
+    <string name="gaming_mode_quick_start_apps_summary">Choose the apps you want to quick launch when in game mode</string>
+    <string name="gaming_mode_menu_opacity_title">Overlay opacity</string>
+
+    <string name="gaming_mode_performance">Performance</string>
+    <string name="gaming_mode_use_game_driver_title">Game driver</string>
+    <string name="gaming_mode_use_game_driver_summary">Use specific drivers for games</string>
+    <string name="gaming_mode_change_performance_title">Performance tuning</string>
+    <string name="gaming_mode_change_performance_summary">Adjust performance level when in game mode</string>
+    <string name="gaming_mode_performance_title">Performance level</string>
+
+    <string name="gaming_mode_notifications">Ringer &amp; Notification</string>
+    <string name="gaming_mode_notification_danmaku_title">Notification ticker</string>
+    <string name="gaming_mode_notification_danmaku_summary">Show the notification content in the form of a ticker when in game mode</string>
+    <string name="gaming_mode_disable_notification_alert_title">Turn off heads up</string>
+    <string name="gaming_mode_disable_notification_alert_summary">Block all notifications except incoming calls and alarms when in game mode</string>
+    <string name="gaming_mode_disable_ringtone_title">Turn off ringer</string>
+    <string name="gaming_mode_disable_ringtone_summary">Set the ringer to silent for incoming calls and notifications when in game mode</string>
+    <string name="gaming_mode_auto_answer_call_title">Answer calls automatically</string>
+    <string name="gaming_mode_auto_answer_call_summary">Automatically answer calls when in game mode and no headphones are connected</string>
+
+    <string name="gaming_mode_navigation">Navigation</string>
+    <string name="gaming_mode_disable_hw_keys_title">Turn off hardware buttons</string>
+    <string name="gaming_mode_disable_hw_keys_summary">Disable touch for hardware buttons when in game mode</string>
+    <string name="gaming_mode_disable_gesture_title">Turn off navigation gestures</string>
+    <string name="gaming_mode_disable_gesture_summary">Disable navigation gestures when in game mode</string>
+
+    <string name="gaming_mode_brightness">Brightness</string>
+    <string name="gaming_mode_disable_auto_brightness_title">Turn off automatic brightness</string>
+    <string name="gaming_mode_disable_auto_brightness_summary">Lock the screen brightness when in game mode</string>
+
+    <string name="gaming_mode_danmaku_dynamic_notification_filter_title">Dynamically filter notifications</string>
+    <string name="gaming_mode_danmaku_dynamic_notification_filter_summary">Automatically filter low priority notifications</string>
+    <string name="gaming_mode_danmaku_size_horizontal_title">Text size (Horizontal)</string>
+    <string name="gaming_mode_danmaku_size_vertical_title">Text size (Vertical)</string>
+    <string name="gaming_mode_danmaku_speed_horizontal_title">Ticker speed (Horizontal)</string>
+    <string name="gaming_mode_danmaku_speed_vertical_title">Ticker speed (Vertical)</string>
+    <string name="gaming_mode_danmaku_blacklist_title">Blacklist</string>
+    <string name="gaming_mode_danmaku_blacklist_summary">Disable ticker for these applications</string>
+
+    <!-- Display cutout -->
+    <string name="display_hide_notch_title">Hide display cutout</string>
+    <string name="display_hide_notch_summary">Disable black fill-in for display cutout</string>
 
 </resources>
